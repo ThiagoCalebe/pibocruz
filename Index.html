@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ano do Servir - 2026</title>
+    
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- VARIÁVEIS --- */
+        :root {
+            --cor-bg: #F4F4F4;
+            --cor-roxo: #6302DD;
+            --cor-rosa: #DB58DD;
+            --cor-texto: #303030;
+            --cor-branca: #FFFFFF;
+            --bg-card: rgba(255, 255, 255, 0.95);
+        }
+
+        /* --- RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Clash Display', sans-serif;
+            background-color: var(--cor-bg);
+            background-image: url('./imagens/background.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--cor-texto);
+            /* Garante altura total */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- CONTAINER PRINCIPAL (Layout Flex Vertical) --- */
+        #app {
+            width: 100%;
+            max-width: 420px;
+            margin: 0 auto; /* Centraliza horizontalmente */
+            padding: 20px 15px;
+            
+            /* Lógica para rodapé na base */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- HEADER --- */
+        #static-header { 
+            width: 100%; 
+            text-align: center;
+            /* Se quiser que o header não cole no topo, use margin-top, 
+               mas em layout mobile geralmente fica melhor próximo ao topo */
+            margin-bottom: 20px; 
+        }
+        
+        .capa-img { width: 100%; height: auto; display: block; margin-bottom: 15px; background: transparent; }
+        .versiculo-tema { font-size: 0.9rem; line-height: 1.4; color: #555; font-style: italic; margin: 0 10px; }
+        .versiculo-ref { display: block; margin-top: 4px; font-weight: 700; color: var(--cor-roxo); }
+
+        /* --- CONTEÚDO (Expande para centralizar e empurrar footer) --- */
+        #dynamic-content { 
+            width: 100%; 
+            flex-grow: 1; /* Ocupa todo espaço disponível */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Centraliza o conteúdo verticalmente */
+            margin-bottom: 30px; 
+        }
+
+        /* Títulos */
+        h1, h2, h3 {
+            font-family: 'Erakov-Display', serif; 
+            font-weight: 700;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 1px;
+            line-height: 1.1;
+        }
+
+        .page { display: none; flex-direction: column; width: 100%; animation: fadeIn 0.4s ease-out; }
+        .page.active { display: flex; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Títulos de Página */
+        .page-title {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .color-dizimo { color: var(--cor-roxo); }
+        .color-reforma { color: var(--cor-rosa); }
+
+        /* --- BOTÕES --- */
+        .btn {
+            display: flex; justify-content: center; align-items: center;
+            width: 100%; padding: 18px 20px; margin-bottom: 14px;
+            border: none; border-radius: 50px;
+            background: linear-gradient(90deg, #6302DD 0%, #DB58DD 100%) !important;
+            color: #FFFFFF !important;
+            font-size: 1rem; font-weight: 600; text-decoration: none;
+            text-transform: uppercase; letter-spacing: 0.8px;
+            cursor: pointer; box-shadow: 0 6px 20px rgba(99, 2, 221, 0.25);
+            transition: transform 0.2s;
+        }
+        .btn:active { transform: scale(0.96); }
+
+        .btn-outline {
+            background: transparent !important;
+            border: 2px solid var(--cor-roxo);
+            color: var(--cor-roxo) !important;
+            box-shadow: none; margin-top: 15px;
+        }
+
+        /* --- CARDS --- */
+        .info-card {
+            background: var(--bg-card);
+            padding: 0;
+            border-radius: 20px;
+            width: 100%; margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+
+        /* --- PIX --- */
+        .pix-section { padding: 25px 20px; background: #fff; }
+        .pix-coupon {
+            border: 2px dashed var(--cor-roxo);
+            background-color: #f9f9f9;
+            border-radius: 12px; padding: 15px; margin: 10px 0;
+            cursor: pointer; position: relative; transition: background 0.2s;
+        }
+        .reforma-theme .pix-coupon { border-color: var(--cor-rosa); background-color: #fff5fd; }
+        .pix-label { font-size: 0.85rem; text-transform: uppercase; font-weight: 700; color: #888; display: block; margin-bottom: 5px; }
+        .pix-key-display { font-family: monospace; font-size: 1.1rem; font-weight: 700; color: #000; word-break: break-all; display: block; margin: 5px 0; }
+        .click-hint { font-size: 0.75rem; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 5px; }
+        
+        .copy-feedback {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: #4CAF50; color: white; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 1.2rem;
+            opacity: 0; pointer-events: none; transition: opacity 0.3s;
+        }
+        .copy-feedback.show { opacity: 1; }
+
+        /* --- BANCO --- */
+        .bank-section { background-color: #f4f4f4; padding: 20px; text-align: left; border-top: 1px solid #eee; }
+        .bank-title { font-weight: 700; font-size: 1rem; color: var(--cor-texto); margin-bottom: 12px; display: block; }
+        .bank-list { list-style: none; }
+        .bank-list li { font-size: 0.95rem; margin-bottom: 8px; color: #555; display: flex; flex-direction: column; }
+        .bank-label { font-size: 0.75rem; color: #999; text-transform: uppercase; font-weight: 600; }
+        .bank-value { font-weight: 500; color: #333; }
+
+        /* --- FOOTER (Discreto e na Base) --- */
+        #static-footer { 
+            text-align: center; 
+            margin-top: auto; /* Garante que fique no final se sobrar espaço */
+            padding-top: 20px;
+        }
+        .footer-logo-img { max-width: 150px; width: 100%; height: auto; margin-bottom: 10px; }
+        
+        .copyright { 
+            font-size: 0.75rem; 
+            color: #999; /* Cor discreta */
+        }
+        .copyright a { 
+            color: inherit; /* Herda a cor cinza discreta */
+            text-decoration: none; 
+            font-weight: normal; /* Remove negrito */
+            transition: color 0.3s;
+        }
+        .copyright a:hover {
+            color: var(--cor-roxo); /* Leve destaque apenas ao passar o mouse */
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="app">
+        
+        <header id="static-header">
+            <img src="./imagens/capa.png" alt="Capa Ano do Servir" class="capa-img">
+            <p class="versiculo-tema">
+                "como o Filho do homem, que não veio para ser servido, mas para servir e dar a sua vida em resgate por muitos."
+                <span class="versiculo-ref">(Mt. 20:28)</span>
+            </p>
+        </header>
+
+        <main id="dynamic-content">
+            
+            <section id="home" class="page active">
+                <button class="btn" onclick="router('contribuicao')">CONTRIBUIR</button>
+                <a href="https://www.e-inscricao.com/acampa-drops-2026/enraizados" target="_blank" class="btn">ACAMPA DROPS</a>
+                <a href="https://www.instagram.com/pibocruz/" target="_blank" class="btn">INSTAGRAM</a>
+                <a href="https://maps.app.goo.gl/rsPoEAsbxynx8RCq9" target="_blank" class="btn">COMO CHEGAR</a>
+            </section>
+
+            <section id="contribuicao" class="page">
+                <h2 style="margin-bottom: 30px; color: var(--cor-roxo);">Como deseja contribuir?</h2>
+                <button class="btn" onclick="router('dizimos')">DIZIMAR</button>
+                <button class="btn" onclick="router('oferta')">OFERTA PARA REFORMA</button>
+                <button class="btn btn-outline" onclick="router('home')">VOLTAR</button>
+            </section>
+
+            <section id="dizimos" class="page">
+                <h2 class="page-title color-dizimo">DÍZIMOS</h2>
+                
+                <div class="info-card">
+                    <div class="pix-section">
+                        <span class="pix-label">Chave PIX (CNPJ)</span>
+                        <div class="pix-coupon" onclick="copyToClipboard('53341459000115', 'feedback-dizimo')">
+                            <span class="pix-key-display">53341459000115</span>
+                            <div class="click-hint">📄 Clique para copiar</div>
+                            <div id="feedback-dizimo" class="copy-feedback">COPIADO!</div>
+                        </div>
+                    </div>
+
+                    <div class="bank-section">
+                        <span class="bank-title">Transferência Bancária</span>
+                        <ul class="bank-list">
+                            <li><span class="bank-label">Banco</span><span class="bank-value">Santander (033)</span></li>
+                            <li><span class="bank-label">Agência</span><span class="bank-value">0177</span></li>
+                            <li><span class="bank-label">Conta Corrente</span><span class="bank-value">13005652-5</span></li>
+                            <li><span class="bank-label">Favorecido</span><span class="bank-value">Primeira Igreja Batista em Osvaldo Cruz</span></li>
+                            <li><span class="bank-label">CNPJ</span><span class="bank-value">53.341.459/0001-15</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <a href="https://api.whatsapp.com/send?phone=+5518996350460&text=Comprovante:%20D%C3%ADzimos%20e%20Ofertas%20%E2%9D%A4%EF%B8%8F" target="_blank" class="btn">
+                    ENVIAR COMPROVANTE
+                </a>
+
+                <button class="btn btn-outline" onclick="router('home')">VOLTAR</button>
+            </section>
+
+            <section id="oferta" class="page">
+                <h2 class="page-title color-reforma">REFORMA DO TEMPLO</h2>
+                
+                <div class="info-card reforma-theme">
+                    <div class="pix-section">
+                        <span class="pix-label">Chave PIX (E-mail)</span>
+                        <div class="pix-coupon" onclick="copyToClipboard('pibosvaldocruz.adm@gmail.com', 'feedback-reforma')">
+                            <span class="pix-key-display" style="font-size: 0.95rem;">pibosvaldocruz.adm@gmail.com</span>
+                            <div class="click-hint">📄 Clique para copiar</div>
+                            <div id="feedback-reforma" class="copy-feedback" style="background-color: var(--cor-rosa);">COPIADO!</div>
+                        </div>
+                    </div>
+
+                    <div class="bank-section">
+                        <span class="bank-title">Transferência Bancária</span>
+                        <ul class="bank-list">
+                            <li><span class="bank-label">Banco</span><span class="bank-value">Stone Pagamentos (197)</span></li>
+                            <li><span class="bank-label">Agência</span><span class="bank-value">0001</span></li>
+                            <li><span class="bank-label">Conta Corrente</span><span class="bank-value">8095996-8</span></li>
+                            <li><span class="bank-label">Favorecido</span><span class="bank-value">Primeira Igreja Batista em Osvaldo Cruz</span></li>
+                            <li><span class="bank-label">CNPJ</span><span class="bank-value">53.341.459/0001-15</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <a href="https://api.whatsapp.com/send?phone=+5518997226012&text=Comprovante:%20Oferta%20para%20reforma%20do%20templo%20%E2%9D%A4%EF%B8%8F%E2%80%8D%F0%9F%94%A5" target="_blank" class="btn">
+                    ENVIAR COMPROVANTE
+                </a>
+
+                <button class="btn btn-outline" onclick="router('home')">VOLTAR</button>
+            </section>
+
+        </main>
+
+        <footer id="static-footer">
+            <img src="./imagens/logo.png" alt="Logo Ano do Servir" class="footer-logo-img">
+            <div class="copyright">
+                © 2026 | Desenvolvido por <a href="https://thiagocalebe.com.br" target="_blank">Thiago Calebe</a>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // --- ROUTER ---
+        function router(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const target = document.getElementById(pageId);
+            if(target) {
+                target.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // --- CLIPBOARD ---
+        function copyToClipboard(text, feedbackId) {
+            navigator.clipboard.writeText(text).then(() => {
+                const feedback = document.getElementById(feedbackId);
+                feedback.classList.add('show');
+                setTimeout(() => { feedback.classList.remove('show'); }, 2000);
+            }).catch(err => {
+                console.error('Erro ao copiar', err);
+                alert('Copie manualmente: ' + text);
+            });
+        }
+    </script>
+</body>
+</html>
