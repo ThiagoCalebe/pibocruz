@@ -8,7 +8,8 @@
 
     <meta property="og:title" content="Ano do Servir - 2026">
     <meta property="og:description" content="Contribua e participe dos projetos da PIB Osvaldo Cruz.">
-    <meta property="og:image" content="https://pibocruz.vercel.app/imagens/capa.png"> <meta property="og:url" content="https://pibocruz.vercel.app/">
+    <meta property="og:image" content="https://pibocruz.vercel.app/imagens/capa.png">
+    <meta property="og:url" content="https://pibocruz.vercel.app/">
     <meta property="og:type" content="website">
 
     <link href="https://api.fontshare.com/v2/css?f[]=clash-display@300,400,500,600,700&display=swap" rel="stylesheet">
@@ -27,6 +28,11 @@
         /* --- RESET --- */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
+        html, body {
+            height: 100%; /* Garante altura total */
+            overflow-x: hidden;
+        }
+
         body {
             font-family: 'Clash Display', sans-serif;
             background-color: var(--cor-bg);
@@ -35,46 +41,53 @@
             background-position: center;
             background-attachment: fixed;
             color: var(--cor-texto);
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* --- CONTAINER PRINCIPAL --- */
+        /* --- CONTAINER GERAL --- */
         #app {
             width: 100%;
             max-width: 420px;
             margin: 0 auto;
-            padding: 20px 15px;
-            min-height: 100vh;
+            height: 100%; /* Ocupa 100% da altura da janela */
             display: flex;
             flex-direction: column;
+            padding: 10px 15px; /* Padding reduzido */
         }
 
-        /* --- HEADER (Ajustado para ficar mais próximo) --- */
+        /* --- AGRUPAMENTO 1: CONTEÚDO PRINCIPAL (Header + Botões) --- */
+        /* Ocupa todo o espaço disponível e centraliza seu conteúdo */
+        #main-wrapper {
+            flex-grow: 1; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Centraliza verticalmente Capa + Botões */
+            align-items: center;
+            width: 100%;
+        }
+
+        /* --- HEADER --- */
         #static-header { 
             width: 100%; 
             text-align: center;
-            /* Reduzi a margem inferior para aproximar dos botões */
-            margin-bottom: 10px; 
-            margin-top: 10px; /* Pequeno respiro no topo */
+            margin-bottom: 15px; 
         }
         
         .capa-img { 
             width: 100%; 
             height: auto; 
             display: block; 
-            /* Reduzi a margem da imagem para o texto bíblico */
             margin-bottom: 8px; 
             background: transparent; 
         }
         
         .versiculo-tema { 
-            font-size: 0.85rem; 
+            font-size: 0.8rem; /* Levemente menor para caber melhor */
             line-height: 1.3; 
             color: #555; 
             font-style: italic; 
-            margin: 0 10px; 
+            padding: 0 5px;
         }
         
         .versiculo-ref { 
@@ -82,19 +95,12 @@
             margin-top: 3px; 
             font-weight: 700; 
             color: var(--cor-roxo); 
-            font-size: 0.8rem;
+            font-size: 0.75rem;
         }
 
-        /* --- CONTEÚDO (Botões colados no header) --- */
+        /* --- ÁREA DOS BOTÕES --- */
         #dynamic-content { 
             width: 100%; 
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            /* MUDANÇA PRINCIPAL: flex-start joga tudo para cima, perto da capa */
-            justify-content: flex-start; 
-            padding-top: 10px; /* Pequeno ajuste fino */
-            margin-bottom: 20px; 
         }
 
         /* Títulos */
@@ -109,12 +115,12 @@
 
         .page { display: none; flex-direction: column; width: 100%; animation: fadeIn 0.4s ease-out; }
         .page.active { display: flex; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Títulos de Página */
+        /* Títulos de Página (Ajustados para mobile) */
         .page-title {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
             text-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         .color-dizimo { color: var(--cor-roxo); }
@@ -123,13 +129,13 @@
         /* --- BOTÕES --- */
         .btn {
             display: flex; justify-content: center; align-items: center;
-            width: 100%; padding: 16px 20px; margin-bottom: 12px; /* Reduzi levemente o espaçamento */
+            width: 100%; padding: 15px 20px; margin-bottom: 10px; /* Mais compacto */
             border: none; border-radius: 50px;
             background: linear-gradient(90deg, #6302DD 0%, #DB58DD 100%) !important;
             color: #FFFFFF !important;
-            font-size: 0.95rem; font-weight: 600; text-decoration: none;
+            font-size: 0.9rem; font-weight: 600; text-decoration: none;
             text-transform: uppercase; letter-spacing: 0.8px;
-            cursor: pointer; box-shadow: 0 6px 20px rgba(99, 2, 221, 0.25);
+            cursor: pointer; box-shadow: 0 4px 15px rgba(99, 2, 221, 0.2);
             transition: transform 0.2s;
         }
         .btn:active { transform: scale(0.96); }
@@ -138,61 +144,67 @@
             background: transparent !important;
             border: 2px solid var(--cor-roxo);
             color: var(--cor-roxo) !important;
-            box-shadow: none; margin-top: 10px;
+            box-shadow: none; margin-top: 5px;
         }
 
         /* --- CARDS --- */
         .info-card {
             background: var(--bg-card);
             padding: 0;
-            border-radius: 20px;
-            width: 100%; margin-bottom: 20px;
+            border-radius: 16px;
+            width: 100%; margin-bottom: 15px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
             overflow: hidden;
+            /* Scroll interno se o conteúdo for muito grande em telas minúsculas */
+            max-height: 55vh; 
+            overflow-y: auto;
         }
 
         /* --- PIX --- */
-        .pix-section { padding: 25px 20px; background: #fff; }
+        .pix-section { padding: 15px; background: #fff; }
         .pix-coupon {
             border: 2px dashed var(--cor-roxo);
             background-color: #f9f9f9;
-            border-radius: 12px; padding: 15px; margin: 10px 0;
-            cursor: pointer; position: relative; transition: background 0.2s;
+            border-radius: 12px; padding: 10px; margin: 5px 0;
+            cursor: pointer; position: relative;
         }
         .reforma-theme .pix-coupon { border-color: var(--cor-rosa); background-color: #fff5fd; }
-        .pix-label { font-size: 0.85rem; text-transform: uppercase; font-weight: 700; color: #888; display: block; margin-bottom: 5px; }
-        .pix-key-display { font-family: monospace; font-size: 1.1rem; font-weight: 700; color: #000; word-break: break-all; display: block; margin: 5px 0; }
-        .click-hint { font-size: 0.75rem; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 5px; }
+        .pix-label { font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #888; display: block; margin-bottom: 3px; }
+        .pix-key-display { font-family: monospace; font-size: 0.95rem; font-weight: 700; color: #000; word-break: break-all; display: block; margin: 3px 0; }
+        .click-hint { font-size: 0.7rem; color: #999; text-transform: uppercase; margin-top: 5px; }
         
         .copy-feedback {
             position: absolute; top: 0; left: 0; right: 0; bottom: 0;
             background: #4CAF50; color: white; border-radius: 10px;
             display: flex; align-items: center; justify-content: center;
-            font-weight: 700; font-size: 1.2rem;
+            font-weight: 700; font-size: 1rem;
             opacity: 0; pointer-events: none; transition: opacity 0.3s;
         }
         .copy-feedback.show { opacity: 1; }
 
         /* --- BANCO --- */
-        .bank-section { background-color: #f4f4f4; padding: 20px; text-align: left; border-top: 1px solid #eee; }
-        .bank-title { font-weight: 700; font-size: 1rem; color: var(--cor-texto); margin-bottom: 12px; display: block; }
+        .bank-section { background-color: #f4f4f4; padding: 15px; text-align: left; border-top: 1px solid #eee; }
+        .bank-title { font-weight: 700; font-size: 0.9rem; color: var(--cor-texto); margin-bottom: 8px; display: block; }
         .bank-list { list-style: none; }
-        .bank-list li { font-size: 0.95rem; margin-bottom: 8px; color: #555; display: flex; flex-direction: column; }
-        .bank-label { font-size: 0.75rem; color: #999; text-transform: uppercase; font-weight: 600; }
+        .bank-list li { font-size: 0.85rem; margin-bottom: 6px; color: #555; display: flex; flex-direction: column; }
+        .bank-label { font-size: 0.7rem; color: #999; text-transform: uppercase; font-weight: 600; }
         .bank-value { font-weight: 500; color: #333; }
 
-        /* --- FOOTER (Discreto e na Base) --- */
+        /* --- AGRUPAMENTO 2: FOOTER (Logo + Rodapé) --- */
+        /* Fica sempre na base sem precisar de scroll */
         #static-footer { 
+            width: 100%;
             text-align: center; 
-            margin-top: auto;
             padding-top: 10px;
-            padding-bottom: 10px;
+            margin-top: auto; /* Empurrão final caso sobre muito espaço */
+            flex-shrink: 0; /* Impede que o footer seja esmagado */
         }
-        .footer-logo-img { max-width: 140px; width: 100%; height: auto; margin-bottom: 8px; }
         
-        .copyright { font-size: 0.75rem; color: #999; }
-        .copyright a { color: inherit; text-decoration: none; font-weight: normal; transition: color 0.3s; }
+        .footer-logo-img { max-width: 120px; width: 100%; height: auto; margin-bottom: 5px; }
+        
+        .copyright { font-size: 0.7rem; color: #999; }
+        .copyright a { color: inherit; text-decoration: none; font-weight: normal; }
         .copyright a:hover { color: var(--cor-roxo); }
 
     </style>
@@ -201,95 +213,96 @@
 
     <div id="app">
         
-        <header id="static-header">
-            <img src="./imagens/capa.png" alt="Capa Ano do Servir" class="capa-img">
-            <p class="versiculo-tema">
-                "como o Filho do homem, que não veio para ser servido, mas para servir e dar a sua vida em resgate por muitos."
-                <span class="versiculo-ref">(Mt. 20:28)</span>
-            </p>
-        </header>
-
-        <main id="dynamic-content">
+        <div id="main-wrapper">
             
-            <section id="home" class="page active">
-                <button class="btn" onclick="router('contribuicao')">CONTRIBUIR</button>
-                <a href="https://www.e-inscricao.com/acampa-drops-2026/enraizados" target="_blank" class="btn">ACAMPA DROPS</a>
-                <a href="https://www.instagram.com/pibocruz/" target="_blank" class="btn">INSTAGRAM</a>
-                <a href="https://maps.app.goo.gl/rsPoEAsbxynx8RCq9" target="_blank" class="btn">COMO CHEGAR</a>
-            </section>
+            <header id="static-header">
+                <img src="./imagens/capa.png" alt="Capa Ano do Servir" class="capa-img">
+                <p class="versiculo-tema">
+                    "como o Filho do homem, que não veio para ser servido, mas para servir e dar a sua vida em resgate por muitos."
+                    <span class="versiculo-ref">(Mt. 20:28)</span>
+                </p>
+            </header>
 
-            <section id="contribuicao" class="page">
-                <h2 style="margin-bottom: 25px; color: var(--cor-roxo); font-size: 1.4rem;">Como deseja contribuir?</h2>
-                <button class="btn" onclick="router('dizimos')">DIZIMAR</button>
-                <button class="btn" onclick="router('oferta')">OFERTA PARA REFORMA</button>
-                <button class="btn btn-outline" onclick="router('home')">VOLTAR</button>
-            </section>
-
-            <section id="dizimos" class="page">
-                <h2 class="page-title color-dizimo">DÍZIMOS</h2>
+            <main id="dynamic-content">
                 
-                <div class="info-card">
-                    <div class="pix-section">
-                        <span class="pix-label">Chave PIX (CNPJ)</span>
-                        <div class="pix-coupon" onclick="copyToClipboard('53341459000115', 'feedback-dizimo')">
-                            <span class="pix-key-display">53341459000115</span>
-                            <div class="click-hint">📄 Clique para copiar</div>
-                            <div id="feedback-dizimo" class="copy-feedback">COPIADO!</div>
+                <section id="home" class="page active">
+                    <button class="btn" onclick="router('contribuicao')">CONTRIBUIR</button>
+                    <a href="https://www.e-inscricao.com/acampa-drops-2026/enraizados" target="_blank" class="btn">ACAMPA DROPS</a>
+                    <a href="https://www.instagram.com/pibocruz/" target="_blank" class="btn">INSTAGRAM</a>
+                    <a href="https://maps.app.goo.gl/rsPoEAsbxynx8RCq9" target="_blank" class="btn">COMO CHEGAR</a>
+                </section>
+
+                <section id="contribuicao" class="page">
+                    <h2 style="margin-bottom: 20px; color: var(--cor-roxo); font-size: 1.2rem;">Como deseja contribuir?</h2>
+                    <button class="btn" onclick="router('dizimos')">DIZIMAR</button>
+                    <button class="btn" onclick="router('oferta')">OFERTA PARA REFORMA</button>
+                    <button class="btn btn-outline" onclick="router('home')">VOLTAR</button>
+                </section>
+
+                <section id="dizimos" class="page">
+                    <h2 class="page-title color-dizimo">DÍZIMOS</h2>
+                    
+                    <div class="info-card">
+                        <div class="pix-section">
+                            <span class="pix-label">Chave PIX (CNPJ)</span>
+                            <div class="pix-coupon" onclick="copyToClipboard('53341459000115', 'feedback-dizimo')">
+                                <span class="pix-key-display">53341459000115</span>
+                                <div class="click-hint">📄 Clique para copiar</div>
+                                <div id="feedback-dizimo" class="copy-feedback">COPIADO!</div>
+                            </div>
+                        </div>
+
+                        <div class="bank-section">
+                            <span class="bank-title">Transferência Bancária</span>
+                            <ul class="bank-list">
+                                <li><span class="bank-label">Banco</span><span class="bank-value">Santander (033)</span></li>
+                                <li><span class="bank-label">Agência</span><span class="bank-value">0177</span></li>
+                                <li><span class="bank-label">Conta</span><span class="bank-value">13005652-5</span></li>
+                                <li><span class="bank-label">CNPJ</span><span class="bank-value">53.341.459/0001-15</span></li>
+                            </ul>
                         </div>
                     </div>
 
-                    <div class="bank-section">
-                        <span class="bank-title">Transferência Bancária</span>
-                        <ul class="bank-list">
-                            <li><span class="bank-label">Banco</span><span class="bank-value">Santander (033)</span></li>
-                            <li><span class="bank-label">Agência</span><span class="bank-value">0177</span></li>
-                            <li><span class="bank-label">Conta Corrente</span><span class="bank-value">13005652-5</span></li>
-                            <li><span class="bank-label">Favorecido</span><span class="bank-value">Primeira Igreja Batista em Osvaldo Cruz</span></li>
-                            <li><span class="bank-label">CNPJ</span><span class="bank-value">53.341.459/0001-15</span></li>
-                        </ul>
-                    </div>
-                </div>
+                    <a href="https://api.whatsapp.com/send?phone=+5518996350460&text=Comprovante:%20D%C3%ADzimos%20e%20Ofertas%20%E2%9D%A4%EF%B8%8F" target="_blank" class="btn">
+                        ENVIAR COMPROVANTE
+                    </a>
 
-                <a href="https://api.whatsapp.com/send?phone=+5518996350460&text=Comprovante:%20D%C3%ADzimos%20e%20Ofertas%20%E2%9D%A4%EF%B8%8F" target="_blank" class="btn">
-                    ENVIAR COMPROVANTE
-                </a>
+                    <button class="btn btn-outline" onclick="router('home')">VOLTAR</button>
+                </section>
 
-                <button class="btn btn-outline" onclick="router('home')">VOLTAR</button>
-            </section>
+                <section id="oferta" class="page">
+                    <h2 class="page-title color-reforma">REFORMA DO TEMPLO</h2>
+                    
+                    <div class="info-card reforma-theme">
+                        <div class="pix-section">
+                            <span class="pix-label">Chave PIX (E-mail)</span>
+                            <div class="pix-coupon" onclick="copyToClipboard('pibosvaldocruz.adm@gmail.com', 'feedback-reforma')">
+                                <span class="pix-key-display" style="font-size: 0.85rem;">pibosvaldocruz.adm@gmail.com</span>
+                                <div class="click-hint">📄 Clique para copiar</div>
+                                <div id="feedback-reforma" class="copy-feedback" style="background-color: var(--cor-rosa);">COPIADO!</div>
+                            </div>
+                        </div>
 
-            <section id="oferta" class="page">
-                <h2 class="page-title color-reforma">REFORMA DO TEMPLO</h2>
-                
-                <div class="info-card reforma-theme">
-                    <div class="pix-section">
-                        <span class="pix-label">Chave PIX (E-mail)</span>
-                        <div class="pix-coupon" onclick="copyToClipboard('pibosvaldocruz.adm@gmail.com', 'feedback-reforma')">
-                            <span class="pix-key-display" style="font-size: 0.95rem;">pibosvaldocruz.adm@gmail.com</span>
-                            <div class="click-hint">📄 Clique para copiar</div>
-                            <div id="feedback-reforma" class="copy-feedback" style="background-color: var(--cor-rosa);">COPIADO!</div>
+                        <div class="bank-section">
+                            <span class="bank-title">Transferência Bancária</span>
+                            <ul class="bank-list">
+                                <li><span class="bank-label">Banco</span><span class="bank-value">Stone (197)</span></li>
+                                <li><span class="bank-label">Agência</span><span class="bank-value">0001</span></li>
+                                <li><span class="bank-label">Conta</span><span class="bank-value">8095996-8</span></li>
+                                <li><span class="bank-label">CNPJ</span><span class="bank-value">53.341.459/0001-15</span></li>
+                            </ul>
                         </div>
                     </div>
 
-                    <div class="bank-section">
-                        <span class="bank-title">Transferência Bancária</span>
-                        <ul class="bank-list">
-                            <li><span class="bank-label">Banco</span><span class="bank-value">Stone Pagamentos (197)</span></li>
-                            <li><span class="bank-label">Agência</span><span class="bank-value">0001</span></li>
-                            <li><span class="bank-label">Conta Corrente</span><span class="bank-value">8095996-8</span></li>
-                            <li><span class="bank-label">Favorecido</span><span class="bank-value">Primeira Igreja Batista em Osvaldo Cruz</span></li>
-                            <li><span class="bank-label">CNPJ</span><span class="bank-value">53.341.459/0001-15</span></li>
-                        </ul>
-                    </div>
-                </div>
+                    <a href="https://api.whatsapp.com/send?phone=+5518997226012&text=Comprovante:%20Oferta%20para%20reforma%20do%20templo%20%E2%9D%A4%EF%B8%8F%E2%80%8D%F0%9F%94%A5" target="_blank" class="btn">
+                        ENVIAR COMPROVANTE
+                    </a>
 
-                <a href="https://api.whatsapp.com/send?phone=+5518997226012&text=Comprovante:%20Oferta%20para%20reforma%20do%20templo%20%E2%9D%A4%EF%B8%8F%E2%80%8D%F0%9F%94%A5" target="_blank" class="btn">
-                    ENVIAR COMPROVANTE
-                </a>
+                    <button class="btn btn-outline" onclick="router('home')">VOLTAR</button>
+                </section>
 
-                <button class="btn btn-outline" onclick="router('home')">VOLTAR</button>
-            </section>
-
-        </main>
+            </main>
+        </div>
 
         <footer id="static-footer">
             <img src="./imagens/logo.png" alt="Logo Ano do Servir" class="footer-logo-img">
@@ -301,17 +314,15 @@
     </div>
 
     <script>
-        // --- ROUTER ---
         function router(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             const target = document.getElementById(pageId);
             if(target) {
                 target.classList.add('active');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                // Mantém a estrutura, sem scroll forçado para o topo pois já está tudo visível
             }
         }
 
-        // --- CLIPBOARD ---
         function copyToClipboard(text, feedbackId) {
             navigator.clipboard.writeText(text).then(() => {
                 const feedback = document.getElementById(feedbackId);
