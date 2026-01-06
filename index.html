@@ -3,17 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Primeira Igreja Batista em Osvaldo Cruz | 2026 Ano do Servir</title>
-    <meta name="description" content="Participe e contribua com a Primeira Igreja Batista em Osvaldo Cruz.">
-
-    <link rel="shortcut icon" href="./imagens/favicon.png" type="image/x-icon">
-    <link rel="icon" href="./imagens/favicon.png" type="image/x-icon">
     
-    <meta property="og:title" content="Ano do Servir - 2026">
-    <meta property="og:description" content="Contribua e participe dos projetos da PIB Osvaldo Cruz.">
-    <meta property="og:image" content="https://pibocruz.vercel.app/imagens/capa.png">
-    <meta property="og:url" content="https://pibocruz.vercel.app/">
+    <title>Primeira Igreja Batista em Osvaldo Cruz | 2026 Ano do Servir</title>
+    
+    <meta name="description" content="Participe e contribua com a Primeira Igreja Batista em Osvaldo Cruz. Ano do Servir: Servi ao SENHOR com alegria.">
+
+    <link rel="shortcut icon" href="./imagens/favicon.png" type="image/png">
+    <link rel="icon" href="./imagens/favicon.png" type="image/png">
+
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pibocruz.vercel.app/">
+    <meta property="og:title" content="PIB Osvaldo Cruz | 2026 Ano do Servir">
+    <meta property="og:description" content="Contribua e participe dos projetos da PIB. 'Servi ao SENHOR com alegria...'. Clique e saiba mais.">
+    <meta property="og:image" content="https://pibocruz.vercel.app/imagens/social.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://pibocruz.vercel.app/">
+    <meta name="twitter:title" content="PIB Osvaldo Cruz | 2026 Ano do Servir">
+    <meta name="twitter:description" content="Contribua e participe dos projetos da PIB. Clique para acessar dízimos, ofertas e agenda.">
+    <meta name="twitter:image" content="https://pibocruz.vercel.app/imagens/social.png">
 
     <link href="https://api.fontshare.com/v2/css?f[]=clash-display@300,400,500,600,700&display=swap" rel="stylesheet">
 
@@ -32,7 +43,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         html, body {
-            height: 100%; /* Garante altura total */
+            height: 100%;
             overflow-x: hidden;
         }
 
@@ -53,19 +64,18 @@
             width: 100%;
             max-width: 420px;
             margin: 0 auto;
-            height: 100%; /* Ocupa 100% da altura da janela */
+            height: 100%;
             display: flex;
             flex-direction: column;
-            padding: 10px 15px; /* Padding reduzido */
+            padding: 10px 15px;
         }
 
-        /* --- AGRUPAMENTO 1: CONTEÚDO PRINCIPAL (Header + Botões) --- */
-        /* Ocupa todo o espaço disponível e centraliza seu conteúdo */
+        /* --- AGRUPAMENTO 1: CONTEÚDO PRINCIPAL --- */
         #main-wrapper {
             flex-grow: 1; 
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Centraliza verticalmente Capa + Botões */
+            justify-content: center;
             align-items: center;
             width: 100%;
         }
@@ -81,32 +91,33 @@
             width: 100%; 
             height: auto; 
             display: block; 
-            margin-bottom: 8px; 
+            margin-bottom: 12px; 
             background: transparent; 
         }
         
+        /* TEXTO BÍBLICO ATUALIZADO */
         .versiculo-tema { 
-            font-size: 0.8rem; /* Levemente menor para caber melhor */
-            line-height: 1.3; 
-            color: #555; 
-            font-style: italic; 
+            font-size: 1rem; /* Um pouco maior para destaque */
+            line-height: 1.4; 
+            color: var(--cor-roxo); /* Mesma cor Roxo da marca */
+            font-weight: 600; /* Negrito similar ao da referência */
+            font-style: normal; /* Remove itálico para uniformizar */
             padding: 0 5px;
         }
         
         .versiculo-ref { 
             display: block; 
-            margin-top: 3px; 
+            margin-top: 6px; 
             font-weight: 700; 
             color: var(--cor-roxo); 
-            font-size: 0.75rem;
+            font-size: 0.85rem;
         }
 
-        /* --- ÁREA DOS BOTÕES --- */
+        /* --- CONTEÚDO DINÂMICO --- */
         #dynamic-content { 
             width: 100%; 
         }
 
-        /* Títulos */
         h1, h2, h3 {
             font-family: 'Erakov-Display', serif; 
             font-weight: 700;
@@ -120,7 +131,6 @@
         .page.active { display: flex; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Títulos de Página (Ajustados para mobile) */
         .page-title {
             font-size: 1.5rem;
             margin-bottom: 15px;
@@ -132,7 +142,7 @@
         /* --- BOTÕES --- */
         .btn {
             display: flex; justify-content: center; align-items: center;
-            width: 100%; padding: 15px 20px; margin-bottom: 10px; /* Mais compacto */
+            width: 100%; padding: 15px 20px; margin-bottom: 10px;
             border: none; border-radius: 50px;
             background: linear-gradient(90deg, #6302DD 0%, #DB58DD 100%) !important;
             color: #FFFFFF !important;
@@ -159,7 +169,6 @@
             text-align: center;
             box-shadow: 0 5px 20px rgba(0,0,0,0.05);
             overflow: hidden;
-            /* Scroll interno se o conteúdo for muito grande em telas minúsculas */
             max-height: 55vh; 
             overflow-y: auto;
         }
@@ -194,14 +203,13 @@
         .bank-label { font-size: 0.7rem; color: #999; text-transform: uppercase; font-weight: 600; }
         .bank-value { font-weight: 500; color: #333; }
 
-        /* --- AGRUPAMENTO 2: FOOTER (Logo + Rodapé) --- */
-        /* Fica sempre na base sem precisar de scroll */
+        /* --- FOOTER --- */
         #static-footer { 
             width: 100%;
             text-align: center; 
             padding-top: 10px;
-            margin-top: auto; /* Empurrão final caso sobre muito espaço */
-            flex-shrink: 0; /* Impede que o footer seja esmagado */
+            margin-top: auto;
+            flex-shrink: 0;
         }
         
         .footer-logo-img { max-width: 120px; width: 100%; height: auto; margin-bottom: 5px; }
@@ -221,8 +229,7 @@
             <header id="static-header">
                 <img src="./imagens/capa.png" alt="Capa Ano do Servir" class="capa-img">
                 <p class="versiculo-tema">
-                    "como o Filho do homem, que não veio para ser servido, mas para servir e dar a sua vida em resgate por muitos."
-                    <span class="versiculo-ref">(Mt. 20:28)</span>
+                    "Servi ao SENHOR com alegria e apresenta-vos<br>a ele com canto." (Sl. 100:2)
                 </p>
             </header>
 
@@ -322,7 +329,6 @@
             const target = document.getElementById(pageId);
             if(target) {
                 target.classList.add('active');
-                // Mantém a estrutura, sem scroll forçado para o topo pois já está tudo visível
             }
         }
 
