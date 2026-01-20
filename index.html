@@ -95,13 +95,13 @@
             background: transparent; 
         }
         
-        /* TEXTO BÍBLICO ATUALIZADO */
+        /* TEXTO BÍBLICO */
         .versiculo-tema { 
-            font-size: 1rem; /* Um pouco maior para destaque */
+            font-size: 1rem;
             line-height: 1.4; 
-            color: var(--cor-roxo); /* Mesma cor Roxo da marca */
-            font-weight: 600; /* Negrito similar ao da referência */
-            font-style: normal; /* Remove itálico para uniformizar */
+            color: var(--cor-roxo);
+            font-weight: 600;
+            font-style: normal;
             padding: 0 5px;
         }
         
@@ -229,16 +229,23 @@
             <header id="static-header">
                 <img src="./imagens/capa.png" alt="Capa Ano do Servir" class="capa-img">
                 <p class="versiculo-tema">
-                    "Servi ao SENHOR com alegria e apresentai-vos a ele com canto." (Sl. 100:2)
-                </p></p></p></p></p></p></p></p></p></p></p></p>
+                    "Servi ao SENHOR com alegria e<br>apresenta-vos a ele com canto."
+                    <span class="versiculo-ref">(Sl. 100:2)</span>
+                </p>
             </header>
 
             <main id="dynamic-content">
                 
                 <section id="home" class="page active">
+                    
                     <button class="btn" onclick="router('contribuicao')">CONTRIBUIR</button>
+                    
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLScr65_1_AgvfRh7chCVaKw_0KjE9DPbqVY7UH12v3PBa3ivug/viewform" target="_blank" class="btn">INSCRIÇÃO PARA CASA DO OLEIRO</a>
+                    
                     <a href="https://www.e-inscricao.com/acampa-drops-2026/enraizados" target="_blank" class="btn">ACAMPA DROPS</a>
+                    
                     <a href="https://www.instagram.com/pibocruz/" target="_blank" class="btn">INSTAGRAM</a>
+                    
                     <a href="https://maps.app.goo.gl/rsPoEAsbxynx8RCq9" target="_blank" class="btn">COMO CHEGAR</a>
                 </section>
 
@@ -257,7 +264,7 @@
                             <span class="pix-label">Chave PIX (CNPJ)</span>
                             <div class="pix-coupon" onclick="copyToClipboard('53341459000115', 'feedback-dizimo')">
                                 <span class="pix-key-display">53341459000115</span>
-                                <div class="click-hint">📄 Clique para copiar</div>
+                                <div class="click-hint">?? Clique para copiar</div>
                                 <div id="feedback-dizimo" class="copy-feedback">COPIADO!</div>
                             </div>
                         </div>
@@ -288,7 +295,7 @@
                             <span class="pix-label">Chave PIX (E-mail)</span>
                             <div class="pix-coupon" onclick="copyToClipboard('pibosvaldocruz.adm@gmail.com', 'feedback-reforma')">
                                 <span class="pix-key-display" style="font-size: 0.85rem;">pibosvaldocruz.adm@gmail.com</span>
-                                <div class="click-hint">📄 Clique para copiar</div>
+                                <div class="click-hint">?? Clique para copiar</div>
                                 <div id="feedback-reforma" class="copy-feedback" style="background-color: var(--cor-rosa);">COPIADO!</div>
                             </div>
                         </div>
